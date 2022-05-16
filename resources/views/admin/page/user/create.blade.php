@@ -201,7 +201,9 @@
                            @endphp
                         @endif
                         <select id='sel_emp' name="organization_id" style='width: 200px;'>
-                           @if (old('organization_id')) <option value="{{ $org->id }}" selected>{{ $org->title }}</option>@endif
+                           @if (old('organization_id'))
+                            <option value="{{ $org->id }}" selected>{{ $org->title }}</option>
+                           @endif
                         </select>                 
                      </div>
                   </div>

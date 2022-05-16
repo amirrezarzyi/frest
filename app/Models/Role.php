@@ -9,25 +9,13 @@ class Role extends ModelsRole
 {
     use HasFactory; 
 
-    protected $fillable =
-    [
-        'title', 
-        'parent_id', 
-        'national_code', 
-        'manager_id', 
-        'inderpent', 
-        'email', 
-        'phone', 
-        'address', 
-        'fax', 
-        'website', 
-        'logo', 
-        'slug', 
-        'status', 
-    ];
+    protected $guard_name = 'web';
+  
+
 
     public function parent()
     {
         return $this->belongsTo(Role::class);
     }
+ 
 }

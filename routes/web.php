@@ -53,6 +53,8 @@ Route::prefix('/admin')->middleware(['auth'])->group(function () {
     Route::prefix('role')->group(function () {
         Route::get('/', [RoleController::class, 'index'])->name('admin.role.index');   
         Route::get('/getRoles', [RoleController::class, 'getRoles'])->name('admin.role.getRoles');
+        Route::get('/create', [RoleController::class, 'create'])->name('admin.role.create');
+        Route::post('/store', [RoleController::class, 'store'])->name('admin.role.store');
         Route::delete('/destroy/{role}', [RoleController::class, 'destroy'])->name('admin.role.destroy');
     }); 
 
@@ -68,7 +70,7 @@ Route::prefix('/admin')->middleware(['auth'])->group(function () {
 
 //admin      
 Route::view('/admin/profile', 'admin.page.user.profile')->name('admin.profile');
-Route::view('/table', 'table')->name('table');
+ 
  
 
  

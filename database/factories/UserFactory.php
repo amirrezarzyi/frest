@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Organization;
+use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -18,18 +19,20 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        return [
-            'username' => "06" . rand(00000000,999999999),
+       return [
+            'username' => "06" . rand(111111111,999999999),
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'mobile' => 0 . rand(9150000000,9159999999),
             'status' => 1,
+            'avatar' => 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/'.rand(1,1000).'.jpg',
             'email' => $this->faker->unique()->safeEmail(),
             'organization_id' => Organization::inRandomOrder()->first()->id,  
             'email_verified_at' => now(),
             'password' => '$2y$10$RFOsxDuhkPA4nX7S8zVUmezu9zWhGCa4e9Ggrmwb/V7/L4bCPHq2e', // adminadmin
             'remember_token' => Str::random(10),
-        ];
+        ]; 
+
     }
 
     /**

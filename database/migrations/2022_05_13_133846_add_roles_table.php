@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('roles', function (Blueprint $table) { 
             $table->foreignId('parent_id')->after('name')->nullable()->constrained('roles')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('key')->after('parent_id')->nullable();  
+            $table->string('key')->after('parent_id')->unique()->nullable();  
             $table->foreignId('system_id')->after('key')->nullable()->constrained('sub_systems')->onUpdate('cascade')->onDelete('cascade');
         });
     }

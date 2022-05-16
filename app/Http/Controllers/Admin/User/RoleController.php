@@ -3,18 +3,24 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Role\RoleRequest;
+use App\Models\Permission;
 use App\Models\Role;
+use App\Models\SubSystem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
+
+use function GuzzleHttp\Promise\all;
 
 class RoleController extends Controller
 {
     public function index()
-    {
+    { 
         $userRoles = Role::where('parent_id',1)->orderBy('id','DESC')->get();
-        $orgRoles = Role::where('parent_id',2)->orderBy('id','DESC')->get(); 
-        $orgKeys = Role::where('parent_id',null)->orderBy('id','DESC')->get(); 
-        return view('admin.page.role.index',compact('userRoles','orgRoles','orgKeys'));
+        $orgRoles = Role::where('parent_id',2)->orderBy('id','DESC')->get();  
+        $groups = Role::where('parent_id',null)->get();  
+
+        return view('admin.page.role.index',compact('userRoles','orgRoles','groups'));
     }
 
     public function getRoles(Request $request)
@@ -43,7 +49,7 @@ class RoleController extends Controller
             ->count();
 
         // Fetch records
-        $roles = Role::orderBy($columnName, $columnSortOrder) 
+        $roles = Role::orderBy($columnName, 'DESC') 
             ->whereNot('parent_id',null)
             ->where('roles.name', 'like', '%' . $searchValue . '%')   
             ->orWhere('parent_id', 'like', '%' . $searchValue . '%')    
@@ -82,6 +88,22 @@ class RoleController extends Controller
         echo json_encode($response);
         exit;
     } 
+
+    public function create()
+    {
+        $permissions = Permission::where('parent_id',null)->get();  
+        $roleGroups = Role::where('parent_id',null)->get();  
+        $subSystems = SubSystem::all();
+        return view('admin.page.role.create',compact('permissions','roleGroups','subSystems'));
+    }
+
+    public function store(RoleRequest $request)
+    { 
+        $inputs = $request->all(); 
+        $role = Role::create($inputs);
+        $role->syncPermissions($inputs['permission']);
+        return to_route('admin.role.index')->with('toast-success','نقش جدید ایجاد شد');
+    }
 
     public function destroy(Role $role)
     {

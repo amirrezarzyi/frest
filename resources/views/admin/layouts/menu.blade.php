@@ -36,20 +36,20 @@
         </a>
       </li> 
        <!-- Roles and Permissions -->
-       <li class="menu-item {{ request()->is('admin/role') || request()->is('admin/permission') ? 'open' : '' }}">
+       <li class="menu-item {{ request()->is('admin/role*') || request()->is('admin/permission*') ? 'open' : '' }}">
          <a href="javascript:void(0);" class="menu-link menu-toggle">
            <i class="menu-icon tf-icons bx bx-check-shield"></i>
            <div data-i18n="Roles &amp; Permissions">نقش‌ها و مجوزها</div>
          </a>
          <ul class="menu-sub">
             <!-- Roles -->
-           <li class="menu-item {{ request()->is('admin/role') ? 'active' : '' }}">
+           <li class="menu-item {{ request()->is('admin/role*') ? 'active' : '' }}">
              <a href="{{ route('admin.role.index') }}" class="menu-link">
                <div data-i18n="Roles">نقش‌ها</div>
              </a>
            </li>
             <!-- Permissions -->
-           <li class="menu-item {{ request()->is('admin/permission') ? 'active' : '' }}">
+           <li class="menu-item {{ request()->is('admin/permission*') ? 'active' : '' }}">
              <a href="{{ route('admin.permission.index') }}" class="menu-link">
                <div data-i18n="Permission">مجوزها</div>
              </a>

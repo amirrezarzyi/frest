@@ -5,7 +5,7 @@
        data-bs-target="#modalCenter{{ $role->id }}">
       <i class="bx bx-shield-quarter"></i>
     </button>
-    <form action="{{ route('admin.permission.destroy',$role->id) }}" method="post" class="d-inline"> 
+    <form action="{{ route('admin.role.destroy',$role->id) }}" method="post" class="d-inline"> 
         @csrf
         @method('DELETE')
         <button type="button" class="btn btn-sm btn-danger text-white btn-icon confirm-delete" title="حذف"><i class="bx bx-trash"></i></button>

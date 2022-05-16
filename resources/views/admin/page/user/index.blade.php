@@ -90,7 +90,7 @@
    <div class="card">  
       <div class="card-datatable table-responsive">
          <table class=" table-bordered table table-hover border-top dataTable no-footer dtr-column collapsed" id="getUsers">
-            <thead>
+            <thead> 
                <tr>
                <th>#</th>
                <th>نام کاربری</th>
@@ -101,6 +101,31 @@
                <th>اقدامات</th> 
                </tr>
             </thead>
+            {{-- <tfoot> 
+               <tr>
+                  <td>#</td>
+                  <td>
+                     <input type="text" class="form-control filter-input" placeholder=" ..." data-column="1">
+                  </td>
+                  <td> 
+                     <select name="" id="" class="form-control">
+                        <option value=""> ...</option> 
+                     </select>
+                  </td> 
+                  <td> 
+                     <input type="text" class="form-control  " placeholder=" ..." >
+                  </td>
+                  <td> 
+                     <input type="text" class="form-control  " placeholder=" ..." >
+                  </td>
+                  <td>
+                      <select name="" id="" class="form-control">
+                        <option value=""> ...</option>
+                      </select>
+                  </td>
+                  <td>اقدامات</td>
+               </tr>
+            </tfoot> --}}
          </table>
       </div> 
    </div>  
@@ -114,33 +139,79 @@
 @endsection
 
 @section('page-js')
-<script type="text/javascript">
+{{-- <script type="text/javascript">
 //datatable
-   $(document).ready(function(){
-       // DataTable
-       $('#getUsers').DataTable({
+$(document).ready(function(){
+      // DataTable
+      $('#getUsers').DataTable({
+         initComplete: function(settings){  
+
+              $('.filter-select').change(function(){
+                table.search(this.value).draw();
+              });
+
+            $('.filter-input').keyup(function(){
+               table.column( $(this).data('column') )
+               .search( $(this).val() ) 
+               .draw();
+            })
+         },
          "columnDefs": [
-        { "orderable": false, "targets": [6,2] }, 
-    ],
-       "oLanguage": {
-           "sUrl": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Persian.json"
-       },
+         { "orderable": false, "targets": [6,2] }, 
+           ],
+         "oLanguage": {
+         "sUrl": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Persian.json"
+          },
+         pageLength: 10,
+         processing: true,
+         serverSide: true,
+         ajax: "{{route('admin.user.getUsers')}}",
+         columns: [
+         { data: 'id' },
+         { data: 'username' }, 
+         { data: 'role' }, 
+         { data: 'last_name' },  
+         { data: 'mobile' }, 
+         { data: 'organization_id' }, 
+         { data: 'actions' }, 
+           ],
+      });
+});
+</script> --}}
+<script type="text/javascript">
+   $(document).ready(function (){
+         var table = $('#getUsers').DataTable({  
+            initComplete: function(settings){   
+               $('.filter-input').keyup(function(){  
+                  table.column( $(this).data('column'))
+                     .search( $(this).val() )
+                     .draw();
+               }); 
+            },
+           "columnDefs": [
+               { "orderable": false, "targets": [6,2] }, 
+           ],
+           "oLanguage": {
+               "sUrl": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Persian.json"
+           },
            pageLength: 10,
            processing: true,
            serverSide: true,
            ajax: "{{route('admin.user.getUsers')}}",
            columns: [
-           { data: 'id' },
-           { data: 'username' }, 
-           { data: 'role' }, 
-           { data: 'last_name' },  
-           { data: 'mobile' }, 
-           { data: 'organization_id' }, 
-           { data: 'actions' }, 
+            { data: 'id' },
+            { data: 'username' }, 
+            { data: 'role' }, 
+            { data: 'last_name' },  
+            { data: 'mobile' }, 
+            { data: 'organization_id' }, 
+            { data: 'actions' }, 
            ],
-       });
+       }); 
    });
 </script>
+
+
 <script>
    // Selector
    const counters = document.querySelectorAll('.counter');
@@ -160,5 +231,5 @@
    }
    updateCount();
    }
-</script>
+</script>  
 @endsection

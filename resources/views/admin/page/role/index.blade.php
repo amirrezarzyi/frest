@@ -9,23 +9,20 @@
 @section('content')
 <h4 class="breadcrumb-wrapper">لیست نقش ها</h4>
 <div class="dt-buttons my-4 ">
-    <button class="dt-button add-new btn btn-primary mb-3 mb-md-0"
-    tabindex="0" aria-controls="DataTables_Table_0" type="button"
-      data-bs-toggle="modal" data-bs-target="#addPermissionModal">
+    <a class="dt-button add-new btn btn-primary mb-3 mb-md-0" href="{{ route('admin.role.create') }}">
       <span>افزودن نقش جدید</span>
-    </button>
+</a>
 </div>
 <!-- roles Table -->
-<div class="row"> 
-    <p id="table-filter" class="col-3">
-        <label for="roleGroup">گروه نقش ها:</label>
-        <select class="form-select" id="roleGroup">
-            <option value="">همه</option>  
-            @foreach ($orgKeys as $orgKey)
-            <option value="{{$orgKey->id}}">{{ $orgKey->name }}</option>   
-            @endforeach
-        </select>
-      </p>
+<div class="row mb-2">   
+  <div class="col-4">
+      <select class="form-control filter-select col-6" data-column="3">
+          <option value="">گروه را انتخاب کنید ....</option>  
+          @foreach ($groups as $group)
+          <option value="{{$group->id}}">{{ $group->name }}</option>   
+          @endforeach
+      </select> 
+  </div>
 </div>
 <div class="card p-2">
     <div class="card-datatable table-responsive">
@@ -55,27 +52,20 @@
 @section('page-js')
 <script type="text/javascript">
   $(document).ready(function (){
-            var table = $('#getRoles').DataTable({
-                // dom: 'lr<"table-filter-container">tip',
-                initComplete: function(settings){
-                    // var api = new $.fn.dataTable.Api( settings );
-                    // $('.table-filter-container', api.table().container()).append(
-                    //     $('#table-filter').detach().show()
-                    // );
+        var table = $('#getRoles').DataTable({ 
+            initComplete: function(settings){  
 
-                    $('#table-filter select').on('change', function(){
-                        table.search(this.value).draw();
-                    });
+              $('.filter-select').change(function(){
+                table.search(this.value).draw();
+              });
 
-                    // var aq = new $.fn.dataTable.Api( settings );
-                    // $('.table-filter-container', aq.table().container()).append(
-                    //     $('#table-filterr').detach().show()
-                    // );
+              // $('.filter-select').change(function(){
+              //     table.column( $(this).data('column') )
+              //     .search( $(this).val() ) 
+              //     .draw();
+              // });
+            },
 
-                    // $('#table-filterr select').on('change', function(){
-                    //     table.search(this.value).draw();
-                    // });
-                },
           "columnDefs": [
               { "orderable": false, "targets": [3] }, 
           ],
@@ -91,8 +81,7 @@
           { data: 'name' },   
           { data: 'parent_id' },   
           { data: 'actions' },   
-          ],
-           
+          ], 
       });
   });
 </script>
