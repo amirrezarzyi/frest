@@ -57,7 +57,7 @@
                 <li class="d-flex align-items-center my-2">
                    <div class="input-group">
                       <div class="input-group input-group-merge">
-                         <input type="password" class="form-control text-start" dir="ltr" id="basic-default-password32" placeholder="············" aria-describedby="basic-default-password">
+                         <input type="password" class="form-control text-start"  id="basic-default-password32" placeholder="············" aria-describedby="basic-default-password">
                          <span class="input-group-text cursor-pointer" id="basic-default-password"><i class="bx bx-hide"></i></span>
                       </div>
                    </div>
@@ -66,7 +66,7 @@
                 <li class="d-flex align-items-center my-2">
                    <div class="input-group">
                       <div class="input-group input-group-merge">
-                         <input type="password" class="form-control text-start" dir="ltr" id="basic-default-password32" placeholder="············" aria-describedby="basic-default-password">
+                         <input type="password" class="form-control text-start"  id="basic-default-password32" placeholder="············" aria-describedby="basic-default-password">
                          <span class="input-group-text cursor-pointer" id="basic-default-password"><i class="bx bx-hide"></i></span>
                       </div>
                    </div>
@@ -75,7 +75,7 @@
                 <li class="d-flex align-items-center my-2">
                    <div class="input-group">
                       <div class="input-group input-group-merge">
-                         <input type="password" class="form-control text-start" dir="ltr" id="basic-default-password32" placeholder="············" aria-describedby="basic-default-password">
+                         <input type="password" class="form-control text-start"  id="basic-default-password32" placeholder="············" aria-describedby="basic-default-password">
                          <span class="input-group-text cursor-pointer" id="basic-default-password"><i class="bx bx-hide"></i></span>
                       </div>
                    </div>

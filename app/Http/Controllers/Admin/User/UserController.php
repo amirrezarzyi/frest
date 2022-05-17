@@ -61,7 +61,8 @@ class UserController extends Controller
 
         $data_arr = array();
 
-        $roles = $roles = Role::where('parent_id',1)->orderBy('id' , 'DESC')->get()->except([3,5]); //ROLES
+        $userRole = Role::where('name','users')->first(); //ROLES
+        $roles = Role::all(); //ROLES
         foreach ($users as $key => $user) {
             $id = $key += 1;
             $username = $user->username; 
@@ -79,11 +80,9 @@ class UserController extends Controller
                 $organization_id = '<img class="rounded-circle" src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/v1488900775/hkx40wm1lkzzqy35kptv.png" width="30" height="30">'. ' '.  $user->organization->title;
             } else{
                 $organization_id = '<img class="rounded-circle" src="'. asset($user->organization->logo) .'" width="30" height="30">'. ' '.  $user->organization->title;
-            }
-
-
+            } 
             
-            $actions = Blade::render("admin.page.user.table.actions", compact('user','roles')); //action buttons
+            $actions = Blade::render("admin.page.user.table.actions", compact('user','userRole')); //action buttons
  
             $data_arr[] = array(
                 "id" => $id,
@@ -136,10 +135,9 @@ class UserController extends Controller
     
      public function create()
     {
-        $roles = Role::where('key','users')->orderBy('id' , 'DESC')->get(); 
+        $role = Role::where('name','users')->first(); 
         $orgs = Organization::orderBy('id','desc')->get();  
-
-        return view('admin.page.user.create',compact('roles','orgs')); 
+        return view('admin.page.user.create',compact('role','orgs')); 
     }
 
     public function store(UserRequest $request)
@@ -180,9 +178,9 @@ class UserController extends Controller
 
     public function edit(User $user)
     { 
-        $roles = Role::where('key','users')->orderBy('id' , 'DESC')->get()->except([3,5]);
-        $orgs = Organization::orderBy('id','desc')->get(); 
-        return view('admin.page.user.edit',compact('user','orgs','roles'));
+        $role = Role::where('name','users')->first();
+        // $orgs = Organization::orderBy('id','desc')->get(); 
+        return view('admin.page.user.edit',compact('user','role'));
     }
 
     public function update(User $user, UserRequest $request)

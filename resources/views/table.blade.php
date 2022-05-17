@@ -49,7 +49,7 @@
           </div>
           <div class="mb-3">
             <label class="form-label" for="add-user-email">ایمیل</label>
-            <input type="text" id="add-user-email" class="form-control text-start" dir="ltr" placeholder="john.doe@example.com" aria-label="john.doe@example.com" name="userEmail">
+            <input type="text" id="add-user-email" class="form-control text-start"  placeholder="john.doe@example.com" aria-label="john.doe@example.com" name="userEmail">
           </div>
           <div class="mb-3">
             <label class="form-label" for="add-user-contact">تماس</label>

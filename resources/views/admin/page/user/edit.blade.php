@@ -86,7 +86,7 @@
                <div class="row g-3">
                   <div class="col-sm-6">
                      <label class="form-label" for="username">نام کاربری</label>
-                     <input type="text" id="username" name="username" class="form-control text-start" dir="ltr" placeholder="061234567(کدملی)" value="{{ old('username',$user->username) }}">
+                     <input type="text" id="username" name="username" class="form-control text-start"  placeholder="061234567(کدملی)" value="{{ old('username',$user->username) }}">
                      <div class="mt-1">
                         @error('username')
                         <span class="text-danger"> * {{ $message }}</span>
@@ -95,7 +95,7 @@
                   </div>
                   <div class="col-sm-6">
                      <label class="form-label" for="email">ایمیل</label>
-                     <input type="text" name="email" id="email" class="form-control text-start" dir="ltr" placeholder="aliamiri@email.com" value="{{ old('email',$user->email) }}">
+                     <input type="text" name="email" id="email" class="form-control text-start"  placeholder="aliamiri@email.com" value="{{ old('email',$user->email) }}">
                      <div class="mt-1">
                         @error('email')
                         <span class="text-danger"> * {{ $message }}</span>
@@ -105,7 +105,7 @@
                   <div class="col-sm-6 form-password-toggle">
                      <label class="form-label" for="password">رمز عبور</label>
                      <div class="input-group input-group-merge">
-                        <input type="password" name="password" id="password" class="form-control text-start" dir="ltr" placeholder="············">
+                        <input type="password" name="password" id="password" class="form-control text-start"  placeholder="············">
                         <span class="input-group-text cursor-pointer" id="password2"><i class="bx bx-hide"></i></span>
                      </div>
                      <div class="mt-1">
@@ -117,7 +117,7 @@
                   <div class="col-sm-6 form-password-toggle">
                      <label class="form-label" for="confirm-password">تایید رمز عبور</label>
                      <div class="input-group input-group-merge">
-                        <input type="password" name="password_confirmation" id="confirm-password" class="form-control text-start" dir="ltr" placeholder="············">
+                        <input type="password" name="password_confirmation" id="confirm-password" class="form-control text-start"  placeholder="············">
                         <span class="input-group-text cursor-pointer" id="confirm-password2"><i class="bx bx-hide"></i></span>
                      </div>
                   </div>
@@ -227,19 +227,19 @@
                </div>
                <div class="row g-3">
                   <div class="row row-bordered g-0">
-                     <div class="col-md p-3">
-                        @foreach ($roles as $role)
+                     <div class="col-md p-3"> 
+                        @foreach ($role->childrens as $role)
                         <div class="form-check form-check-info">
                            <input class="form-check-input" name="role[]" type="checkbox" value="{{ $role->id }}" id="{{ $role->id }}" 
-                           @if (old('role') == null)
+                           {{ (is_array(old('role')) and in_array($role->id, old('role'))) ? ' checked' : '' }}
+                           @if (old('role') == null) 
                                @foreach ($user->roles as $userRole)
                                  {{ $userRole->id == $role->id ? 'checked' : '' }}
                               @endforeach
                            @endif
-                           {{ (is_array(old('role')) and in_array($role->id, old('role'))) ? ' checked' : '' }}
                            > 
-                           <label class="form-check-label" for="{{ $role->id }}"> {{ $role->name }} </label>
-                        </div>
+                           <label class="form-check-label" for="{{ $role->id }}"> {{ $role->title }} </label>
+                        </div> 
                         @endforeach 
                         <div class="mt-1">
                            @error('role')

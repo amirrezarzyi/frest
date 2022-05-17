@@ -9,77 +9,77 @@
 
 @section('content')
 <h4 class="breadcrumb-wrapper mb-1"><small class="text-muted fw-light"><a href="">کاربران</a>/</small> لیست</h4> 
-   <div class="row g-4 mb-4">
-      <div class="col-sm-6 col-xl-3">
-         <div class="card">
-            <div class="card-body">
-               <div class="d-flex align-items-start justify-content-between">
-                  <div class="content-left">
-                     <span class="secondary-font fw-medium">تمامی کاربران</span>
-                     <div class="d-flex align-items-baseline mt-2">
-                        <h4 class="mb-0 me-2"><div class="counter" data-target="{{ $countUsers }}">0</div></h4> 
-                     </div> 
-                  </div>
-                  <span class="badge bg-label-primary rounded p-2 mt-3">
-                  <i class="bx bx-user bx-sm"></i>
-                  </span>
+<div class="row g-4 mb-4">
+   <div class="col-sm-6 col-xl-3">
+      <div class="card">
+         <div class="card-body">
+            <div class="d-flex align-items-start justify-content-between">
+               <div class="content-left">
+                  <span class="secondary-font fw-medium">تمامی کاربران</span>
+                  <div class="d-flex align-items-baseline mt-2">
+                     <h4 class="mb-0 me-2"><div class="counter" data-target="{{ $countUsers }}">0</div></h4> 
+                  </div> 
                </div>
-            </div>
-         </div>
-      </div>
-      <div class="col-sm-6 col-xl-3">
-         <div class="card">
-            <div class="card-body">
-               <div class="d-flex align-items-start justify-content-between">
-                  <div class="content-left">
-                     <span class="secondary-font fw-medium">کاربران ویژه</span>
-                     <div class="d-flex align-items-baseline mt-2">
-                        <h4 class="mb-0 me-2"><div class="counter" data-target="457">0</div></h4> 
-                     </div> 
-                  </div>
-                  <span class="badge bg-label-danger rounded p-2 mt-3">
-                  <i class="bx bx-user-plus bx-sm"></i>
-                  </span>
-               </div>
-            </div>
-         </div>
-      </div>
-      <div class="col-sm-6 col-xl-3">
-         <div class="card">
-            <div class="card-body">
-               <div class="d-flex align-items-start justify-content-between">
-                  <div class="content-left">
-                     <span class="secondary-font fw-medium">کاربران فعال</span>
-                     <div class="d-flex align-items-baseline mt-2">
-                        <h4 class="mb-0 me-2"><div class="counter" data-target="209">0</div></h4> 
-                     </div> 
-                  </div>
-                  <span class="badge bg-label-success rounded p-2 mt-3">
-                  <i class="bx bx-group bx-sm"></i>
-                  </span>
-               </div>
-            </div>
-         </div>
-      </div>
-      <div class="col-sm-6 col-xl-3">
-         <div class="card">
-            <div class="card-body">
-               <div class="d-flex align-items-start justify-content-between">
-                  <div class="content-left">
-                     <span class="secondary-font fw-medium">کاربران در انتظار</span>
-                     <div class="d-flex align-items-baseline mt-2">
-                        <h4 class="mb-0 me-2"><div class="counter" data-target="904">0</div></h4> 
-                     </div> 
-                  </div>
-                  <span class="badge bg-label-warning rounded p-2 mt-3">
-                  <i class="bx bx-user-voice bx-sm"></i>
-                  </span>
-               </div>
+               <span class="badge bg-label-primary rounded p-2 mt-3">
+               <i class="bx bx-user bx-sm"></i>
+               </span>
             </div>
          </div>
       </div>
    </div>
-    
+   <div class="col-sm-6 col-xl-3">
+      <div class="card">
+         <div class="card-body">
+            <div class="d-flex align-items-start justify-content-between">
+               <div class="content-left">
+                  <span class="secondary-font fw-medium">کاربران ویژه</span>
+                  <div class="d-flex align-items-baseline mt-2">
+                     <h4 class="mb-0 me-2"><div class="counter" data-target="457">0</div></h4> 
+                  </div> 
+               </div>
+               <span class="badge bg-label-danger rounded p-2 mt-3">
+               <i class="bx bx-user-plus bx-sm"></i>
+               </span>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-sm-6 col-xl-3">
+      <div class="card">
+         <div class="card-body">
+            <div class="d-flex align-items-start justify-content-between">
+               <div class="content-left">
+                  <span class="secondary-font fw-medium">کاربران فعال</span>
+                  <div class="d-flex align-items-baseline mt-2">
+                     <h4 class="mb-0 me-2"><div class="counter" data-target="209">0</div></h4> 
+                  </div> 
+               </div>
+               <span class="badge bg-label-success rounded p-2 mt-3">
+               <i class="bx bx-group bx-sm"></i>
+               </span>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-sm-6 col-xl-3">
+      <div class="card">
+         <div class="card-body">
+            <div class="d-flex align-items-start justify-content-between">
+               <div class="content-left">
+                  <span class="secondary-font fw-medium">کاربران در انتظار</span>
+                  <div class="d-flex align-items-baseline mt-2">
+                     <h4 class="mb-0 me-2"><div class="counter" data-target="904">0</div></h4> 
+                  </div> 
+               </div>
+               <span class="badge bg-label-warning rounded p-2 mt-3">
+               <i class="bx bx-user-voice bx-sm"></i>
+               </span>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+   
    <!-- Users List Table -->
    <a class="dt-button add-new btn btn-primary my-3 text-white" href="{{ route('admin.user.create') }}">
       <span>

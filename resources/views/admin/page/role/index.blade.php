@@ -15,13 +15,7 @@
 </div>
 <!-- roles Table -->
 <div class="row mb-2">   
-  <div class="col-4">
-      <select class="form-control filter-select col-6" data-column="3">
-          <option value="">گروه را انتخاب کنید ....</option>  
-          @foreach ($groups as $group)
-          <option value="{{$group->id}}">{{ $group->name }}</option>   
-          @endforeach
-      </select> 
+  <div class="col-4"> 
   </div>
 </div>
 <div class="card p-2">
@@ -32,12 +26,13 @@
            <th>#</th> 
            <th>نام نقش</th>  
            <th>نام گروه نقش</th>  
+           <th>کاربران</th>  
            <th>اقدامات</th>  
            </tr>
         </thead>
      </table>
     </div>
-  </div>
+</div>
   <!--/ roles Table -->
 
   
@@ -52,22 +47,10 @@
 @section('page-js')
 <script type="text/javascript">
   $(document).ready(function (){
-        var table = $('#getRoles').DataTable({ 
-            initComplete: function(settings){  
-
-              $('.filter-select').change(function(){
-                table.search(this.value).draw();
-              });
-
-              // $('.filter-select').change(function(){
-              //     table.column( $(this).data('column') )
-              //     .search( $(this).val() ) 
-              //     .draw();
-              // });
-            },
+        var table = $('#getRoles').DataTable({  
 
           "columnDefs": [
-              { "orderable": false, "targets": [3] }, 
+              { "orderable": false, "targets": [3,4] }, 
           ],
           "oLanguage": {
               "sUrl": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Persian.json"
@@ -80,6 +63,7 @@
           { data: 'id' },
           { data: 'name' },   
           { data: 'parent_id' },   
+          { data: 'countUsers' },   
           { data: 'actions' },   
           ], 
       });

@@ -22,7 +22,7 @@
                @csrf
                <div class="mb-3">
                   <label for="username" class="form-label">نام کاربری</label>
-                  <input type="text" class="form-control text-start" dir="ltr" id="username" name="username"
+                  <input type="text" class="form-control text-start"  id="username" name="username"
                      placeholder="نام کاربری خود را وارد کنید" autofocus>
                </div>
                <div class="mb-3 form-password-toggle">
@@ -33,7 +33,7 @@
                      {{-- </a> --}}
                   </div>
                   <div class="input-group input-group-merge">
-                     <input type="password" id="password" class="form-control text-start" dir="ltr"
+                     <input type="password" id="password" class="form-control text-start" 
                         name="password" placeholder="············" aria-describedby="password">
                      <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                   </div>

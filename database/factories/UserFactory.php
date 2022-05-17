@@ -25,7 +25,7 @@ class UserFactory extends Factory
             'last_name' => $this->faker->lastName(),
             'mobile' => 0 . rand(9150000000,9159999999),
             'status' => 1,
-            'avatar' => 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/'.rand(1,1000).'.jpg',
+            'avatar' => 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/'.rand(1,400).'.jpg',
             'email' => $this->faker->unique()->safeEmail(),
             'organization_id' => Organization::inRandomOrder()->first()->id,  
             'email_verified_at' => now(),

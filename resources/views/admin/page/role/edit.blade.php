@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title','مدیریت - ایجاد نقش')
+@section('title','مدیریت - ویرایش نقش')
 
 @section('vendor-css')  
     <!-- select2-->
@@ -8,17 +8,18 @@
 @endsection
 
 @section('content')
-<h4 class="breadcrumb-wrapper mb-2"><small class="text-muted fw-light"><a href="">نقش ها</a>/</small> ایجاد نقش</h4>
+<h4 class="breadcrumb-wrapper mb-2"><small class="text-muted fw-light"><a href="">نقش ها</a>/</small> ویرایش نقش</h4>
 
  <!-- Multi Column with Form Separator -->
  <div class="card mb-1"> 
-  <form class="card-body" action="{{ route('admin.role.store') }}" method="POST">
+  <form class="card-body" action="{{ route('admin.role.update',$role->id) }}" method="POST">
     @csrf
+    @method('PUT')
     <h6 class="fw-normal">* جزئیات نقش</h6>
     <div class="row g-3">
       <div class="col-md-6">
         <label class="form-label" for="title">نام نقش</label>
-        <input type="text" id="title" name="title" value="{{ old('title') }}"
+        <input type="text" id="title" name="title" value="{{ old('title',$role->title) }}"
         class="form-control text-start"  placeholder="...نام نقش را وارد کنید">
         @error('title')
         <div class="mt-1"> 
@@ -28,7 +29,7 @@
       </div> 
       <div class="col-md-6">
         <label class="form-label" for="name">کد یکتا(🔑)</label>
-        <input type="text" id="name" name="name"  value="{{ old('name') }}" class="form-control text-start"  placeholder="...اسم انحصاری نقش را وارد کنید">
+        <input type="text" id="name"  value="{{ old('name',$role->name) }}" class="form-control text-start"  placeholder="...اسم انحصاری نقش را وارد کنید" disabled>
         @error('name')
         <div class="mt-1"> 
           <span class="text-danger">* {{ $message }}</span>
@@ -40,7 +41,7 @@
         <select id="group" class="group" name="parent_id" data-allow-clear="true">
           <option value="">انتخاب</option>
           @foreach ($roleGroups as $group)
-            <option value="{{$group->id}}" {{old('parent_id') == $group->id ? 'selected' : ''}} >{{ $group->name}}</option> 
+            <option value="{{$group->id}}" {{old('parent_id',$role->parent_id) == $group->id ? 'selected' : ''}} >{{ $group->name}}</option> 
           @endforeach
         </select>
         @error('parent_id')
@@ -54,7 +55,7 @@
         <select id="system" name="system_id" class="system" data-allow-clear="true">
           <option value="">انتخاب</option>
           @foreach ($subSystems as $system)
-            <option value="{{$system->id}}" {{ old('system_id') == $system->id ? 'selected' : '' }} >{{ $system->name}}</option> 
+            <option value="{{$system->id}}" {{ old('system_id',$role->system_id) == $system->id ? 'selected' : '' }} >{{ $system->name}}</option> 
           @endforeach
         </select>
         @error('system_id')
@@ -81,6 +82,11 @@
                 <label class="list-group-item">
                   <input class="form-check-input me-1" type="checkbox" value="{{$child->id}}" name="permission[]"
                   {{ (is_array(old('permission')) and in_array($child->id, old('permission'))) ? ' checked' : '' }}
+                  @if (old('permission') == null)
+                    @foreach ($role->permissions as $permissionRole)
+                        {{ $permissionRole->id == $child->id ? 'checked' : '' }}
+                    @endforeach
+                  @endif
                   >
                     {{$child->title}}
                 </label>  

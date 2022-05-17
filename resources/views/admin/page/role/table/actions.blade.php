@@ -1,15 +1,11 @@
 <span class="text-nowrap">
     {{-- <a class="btn btn-sm btn-info text-white btn-icon"  title="مشاهده"><i class="bx bx-show"></i></a> --}}
-    <a href=" " class="btn btn-sm btn-primary text-white btn-icon" title="ویرایش"><i class="bx bx-edit"></i></a>
-    <button type="button" class="btn btn-sm btn-warning text-white btn-icon" data-bs-toggle="modal"  title="ویرایش سطوح دسترسی"
-       data-bs-target="#modalCenter{{ $role->id }}">
-      <i class="bx bx-shield-quarter"></i>
-    </button>
+    <a href="{{ route('admin.role.edit',$role->id) }}" class="btn btn-sm btn-primary text-white btn-icon" title="ویرایش"><i class="bx bx-edit"></i></a>
     <form action="{{ route('admin.role.destroy',$role->id) }}" method="post" class="d-inline"> 
         @csrf
         @method('DELETE')
         <button type="button" class="btn btn-sm btn-danger text-white btn-icon confirm-delete" title="حذف"><i class="bx bx-trash"></i></button>
-    </form>
+    </form> 
 </span> 
 
 <!-- Vertically Centered Modal -->

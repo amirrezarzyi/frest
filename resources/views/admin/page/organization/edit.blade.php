@@ -69,7 +69,7 @@
                             <div class="row g-3">
                                 <div class="col-sm-6">
                                     <label class="form-label" for="title">نام سازمان</label>
-                                    <input type="text" name="title" id="title" value="{{ old('title',$organization->title) }}" class="form-control text-start" dir="ltr" placeholder="امور شعب بانک ملی">
+                                    <input type="text" name="title" id="title" value="{{ old('title',$organization->title) }}" class="form-control text-start"  placeholder="امور شعب بانک ملی">
                                     <div class="mt-1">
                                         @error('title')
                                         <span class="text-danger">* {{ $message }}</span>
@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label class="form-label" for="national_code">کد سازمان</label>
-                                    <input type="text" name="national_code" id="national_code" value="{{ old('national_code',$organization->national_code) }}" class="form-control text-start" dir="ltr" placeholder="0245633285">
+                                    <input type="text" name="national_code" id="national_code" value="{{ old('national_code',$organization->national_code) }}" class="form-control text-start"  placeholder="0245633285">
                                     <div class="mt-1">
                                         @error('national_code')
                                         <span class="text-danger">* {{ $message }}</span>
@@ -256,7 +256,7 @@
                             <div class="row g-3">
                             <div class="row row-bordered g-0">
                                 <div class="col-md p-3">
-                                    @foreach ($roles as $role)
+                                    @foreach ($role->childrens as $role)
                                     <div class="form-check form-check-info">
                                         <input class="form-check-input" name="role[]" type="checkbox" value="{{ $role->id }}" id="{{ $role->id }}" 
                                         {{ (is_array(old('role')) and in_array($role->id, old('role'))) ? ' checked' : '' }}
@@ -266,7 +266,7 @@
                                           @endforeach
                                         @endunless
                                         > 
-                                        <label class="form-check-label" for="{{ $role->id }}"> {{ $role->name }} </label>
+                                        <label class="form-check-label" for="{{ $role->id }}"> {{ $role->title }} </label>
                                     </div>
                                     @endforeach 
                                     <div class="mt-1">

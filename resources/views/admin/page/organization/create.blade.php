@@ -70,7 +70,7 @@
                             <div class="row g-3">
                                 <div class="col-sm-6">
                                     <label class="form-label" for="title">نام سازمان</label>
-                                    <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control text-start" dir="ltr" placeholder="امور شعب بانک ملی">
+                                    <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control text-start"  placeholder="امور شعب بانک ملی">
                                     <div class="mt-1">
                                         @error('title')
                                         <span class="text-danger">* {{ $message }}</span>
@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label class="form-label" for="national_code">کد سازمان</label>
-                                    <input type="text" name="national_code" id="national_code" value="{{ old('national_code') }}" class="form-control text-start" dir="ltr" placeholder="0245633285">
+                                    <input type="text" name="national_code" id="national_code" value="{{ old('national_code') }}" class="form-control text-start"  placeholder="0245633285">
                                     <div class="mt-1">
                                         @error('national_code')
                                         <span class="text-danger">* {{ $message }}</span>

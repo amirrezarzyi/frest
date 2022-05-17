@@ -55,13 +55,19 @@ Route::prefix('/admin')->middleware(['auth'])->group(function () {
         Route::get('/getRoles', [RoleController::class, 'getRoles'])->name('admin.role.getRoles');
         Route::get('/create', [RoleController::class, 'create'])->name('admin.role.create');
         Route::post('/store', [RoleController::class, 'store'])->name('admin.role.store');
+        Route::get('/edit/{role}',[RoleController::class, 'edit'])->name('admin.role.edit');
+        Route::put('/update/{role}', [RoleController::class, 'update'])->name('admin.role.update');
         Route::delete('/destroy/{role}', [RoleController::class, 'destroy'])->name('admin.role.destroy');
     }); 
 
     //Permission
     Route::prefix('permission')->group(function () {
         Route::get('/', [PermissionController::class, 'index'])->name('admin.permission.index');   
-        Route::get('/getPermissions', [PermissionController::class, 'getPermissions'])->name('admin.permission.getPermissions');   
+        Route::get('/getPermissions', [PermissionController::class, 'getPermissions'])->name('admin.permission.getPermissions');  
+        Route::get('/create', [PermissionController::class, 'create'])->name('admin.permission.create');
+        Route::post('/store', [PermissionController::class, 'store'])->name('admin.permission.store');
+        Route::get('/edit/{permission}', [PermissionController::class, 'edit'])->name('admin.permission.edit');
+        Route::put('/update/{permission}', [PermissionController::class, 'update'])->name('admin.permission.update');
         Route::delete('/destroy/{permission}', [PermissionController::class, 'destroy'])->name('admin.permission.destroy');    
     }); 
 

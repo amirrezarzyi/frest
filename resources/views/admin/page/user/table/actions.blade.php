@@ -36,9 +36,9 @@
                                             <th>نام نقش ها</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="table-border-bottom-0">
-                                        @foreach ($roles as $role)
-                                        <tr>
+                                    <tbody class="table-border-bottom-0"> 
+                                        @foreach ($userRole->childrens as $role)
+                                            <tr>
                                             <td>
                                             <div class="form-check form-check-info">
                                                 <input class="form-check-input" name="role[]" type="checkbox"
@@ -48,12 +48,11 @@
                                                 {{($userRole->id === $role->id ? 'checked' : '')}}
                                                 @endforeach
                                                 >
-                                                <label class="form-check-label"
-                                                    for="{{ $user->id . $role->id }}">{{ $role->name }}</label>
+                                                <label class="form-check-label" for="{{ $user->id . $role->id }}">{{ $role->title }}</label>
                                             </div>
                                             </td>
                                         </tr>
-                                        @endforeach
+                                        @endforeach  
                                     </tbody>
                                 </table>
                                 </div>

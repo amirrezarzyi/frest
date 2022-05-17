@@ -27,17 +27,27 @@ class RoleRequest extends FormRequest
         {
             return [
                 'name' => 'required|unique:roles,name',
-                'key' => 'required|required|unique:roles,key',
+                'title' => 'required|required|unique:roles,title',
                 'parent_id' => 'required|exists:roles,id',
                 'system_id' => 'required|exists:sub_systems,id',
+                'permission.*' => 'exists:permissions,id'
             ];
-        } 
+        }  else {
+            return [
+                'name' => 'unique:roles,name,'.$this->role->id,
+                'title' => 'required|required|unique:roles,title,'.$this->role->id,
+                'parent_id' => 'required|exists:roles,id',
+                'system_id' => 'required|exists:sub_systems,id',
+                'permission.*' => 'exists:permissions,id' 
+            ]; 
+        }
     }
 
     public function attributes()
     {
         return [
             'parent_id' => 'گروه والد', 
+            'name' => 'کلید', 
         ];
     }
 }

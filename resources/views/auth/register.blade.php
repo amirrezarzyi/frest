@@ -23,23 +23,23 @@
                @csrf
                <div class="mb-3">
                   <label for="username" class="form-label">نام کاربری</label>
-                  <input type="text" class="form-control text-start" dir="ltr" id="username" name="username" placeholder="نام کاربری خود را وارد کنید" autofocus>
+                  <input type="text" class="form-control text-start"  id="username" name="username" placeholder="نام کاربری خود را وارد کنید" autofocus>
                </div>
                <div class="mb-3">
                   <label for="email" class="form-label">ایمیل</label>
-                  <input type="text" class="form-control text-start" dir="ltr" id="email" name="email" placeholder="ایمیل خود را وارد کنید">
+                  <input type="text" class="form-control text-start"  id="email" name="email" placeholder="ایمیل خود را وارد کنید">
                </div>
                <div class="mb-3 form-password-toggle">
                   <label class="form-label" for="password">رمز عبور</label>
                   <div class="input-group input-group-merge">
-                     <input type="password" id="password" class="form-control text-start" dir="ltr" name="password" placeholder="············" aria-describedby="password">
+                     <input type="password" id="password" class="form-control text-start"  name="password" placeholder="············" aria-describedby="password">
                      <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                   </div>
                </div>
                <div class="mb-3 form-password-toggle">
                   <label class="form-label" for="password">نکرار رمز عبور</label>
                   <div class="input-group input-group-merge">
-                     <input type="password" id="password" class="form-control text-start" dir="ltr" name="password" placeholder="············" aria-describedby="password">
+                     <input type="password" id="password" class="form-control text-start"  name="password" placeholder="············" aria-describedby="password">
                      <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                   </div>
                </div>

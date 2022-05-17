@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Permission\PermissionRequest;
 use App\Models\Permission;
+use App\Models\SubSystem;
+use Faker\Provider\ar_EG\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 
@@ -15,8 +18,7 @@ class PermissionController extends Controller
     }
 
     public function getPermissions(Request $request)
-    {
-         
+    { 
         ## Read value
         $draw = $request->get('draw');
         $start = $request->get("start");
@@ -40,7 +42,7 @@ class PermissionController extends Controller
             ->count();
 
         // Fetch records
-        $permissions = Permission::orderBy($columnName, $columnSortOrder)  
+        $permissions = Permission::orderBy($columnName, 'DESC')  
             ->whereNot('parent_id',null) 
             ->where('permissions.name', 'like', '%' . $searchValue . '%') 
             ->select('permissions.*')
@@ -53,13 +55,13 @@ class PermissionController extends Controller
         $data_arr = array(); 
         foreach ($permissions as $key => $permission) {
             $id = $key += 1;
-            $name = $permission->name;   
+            $name = $permission->title;   
             if($permission->parent_id % 2 == 0)  { 
-            $parent_id =  '<span class="badge bg-label-warning m-1">'. $permission->parent->name .'</span>' ;  
+            $parent_id =  '<span class="badge bg-label-warning m-1">'. $permission->parent->title .'</span>' ;  
             } else {
-                $parent_id =  '<span class="badge bg-label-info m-1">'. $permission->parent->name .'</span>' ;  
+                $parent_id =  '<span class="badge bg-label-info m-1">'. $permission->parent->title .'</span>' ;  
             }      
- 
+
             $actions = Blade::render("admin.page.permission.table.actions", compact('permission')); //action buttons
  
             $data_arr[] = array(
@@ -80,6 +82,37 @@ class PermissionController extends Controller
         echo json_encode($response);
         exit;
     
+    }
+
+    public function create()
+    {
+        $permissionGroup = Permission::where('parent_id',null)->get(); 
+        $subSystems = SubSystem::all();
+        return view('admin.page.permission.create',compact('permissionGroup','subSystems'));
+    }
+
+    public function store(PermissionRequest $request)
+    {
+        $inputs = $request->all();
+        Permission::create($inputs);
+        
+        return to_route('admin.permission.index')->with('toast-success','مجوز جدید ایجاد شد');
+
+    }
+
+    public function edit(Permission $permission)
+    {
+        $permissionGroup = Permission::where('parent_id',null)->get(); 
+        $subSystems = SubSystem::all();
+        return view('admin.page.permission.edit',compact('permissionGroup','subSystems','permission'));
+    }
+
+    public function update(Permission $permission, PermissionRequest $request)
+    {
+        $inputs = $request->all();
+        $permission->update($inputs);
+
+        return to_route('admin.permission.index')->with('toast-success','مجوز ویرایش گردید');
     }
 
     public function destroy(Permission $permission)

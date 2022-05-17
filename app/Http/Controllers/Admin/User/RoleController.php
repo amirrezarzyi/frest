@@ -8,9 +8,7 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\SubSystem;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Blade;
-
-use function GuzzleHttp\Promise\all;
+use Illuminate\Support\Facades\Blade; 
 
 class RoleController extends Controller
 {
@@ -62,18 +60,22 @@ class RoleController extends Controller
         
         foreach ($roles as $key => $role) {
             $id = $key += 1; 
-            $name = $role->name;  
-            if($role->parent_id % 2 == 0)  { 
-                $parent_id =  '<span class="badge bg-label-warning m-1">'. $role->parent->name .'</span>' ;  
-                } else {
-                    $parent_id =  '<span class="badge bg-label-info m-1">'. $role->parent->name .'</span>' ;  
-                }     
+            $name = $role->title;  
+            if($role->parent_id % 2 == 0) 
+            { 
+            $parent_id =  '<span class="badge bg-label-warning m-1">'. $role->parent->title .'</span>' ;  
+            } else {
+                $parent_id =  '<span class="badge bg-label-info m-1">'. $role->parent->title .'</span>' ;  
+            }     
+
+            $countUsers = Blade::render("admin.page.role.table.avatars",compact('role'));  
             $actions = Blade::render("admin.page.role.table.actions", compact('role')); //action buttons
 
             $data_arr[] = array(
                 "id" => $id,
                 "name" => $name,  
                 "parent_id" => $parent_id,  
+                "countUsers" => $countUsers,  
                 "actions" => $actions,  
             );
         }
@@ -103,6 +105,22 @@ class RoleController extends Controller
         $role = Role::create($inputs);
         $role->syncPermissions($inputs['permission']);
         return to_route('admin.role.index')->with('toast-success','نقش جدید ایجاد شد');
+    }
+
+    public function edit(Role $role)
+    { 
+        $permissions = Permission::where('parent_id',null)->get();  
+        $roleGroups = Role::where('parent_id',null)->get();  
+        $subSystems = SubSystem::all();
+        return view('admin.page.role.edit',compact('permissions','roleGroups','subSystems','role'));
+    }
+
+    public function update(RoleRequest $request, Role $role)
+    {
+        $inputs = $request->all();
+        $role->update($inputs);
+        $role->syncPermissions($request->permission);
+        return to_route('admin.role.index')->with('toast-success','نقش ویرایش گردید');
     }
 
     public function destroy(Role $role)

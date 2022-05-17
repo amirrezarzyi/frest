@@ -156,7 +156,7 @@ class OrganizationController extends Controller
 
     public function create()
     {
-        $roles = Role::where('key','organizations')->orderBy('id' , 'DESC')->get();
+        $roles = Role::where('name','organizations')->orderBy('id' , 'DESC')->get();
         $users = User::all()->except(1);
         $orgs = Organization::all();
 
@@ -224,11 +224,11 @@ class OrganizationController extends Controller
  
     public function edit(Organization $organization)
     {
-        $roles = Role::where('key','organizations')->orderBy('id' , 'DESC')->get();
+        $role = Role::where('name','organizations')->first();
         $users = User::all()->except(1);
         $orgs = Organization::all();
 
-        return view('admin.page.organization.edit',compact('roles','users','orgs','organization'));
+        return view('admin.page.organization.edit',compact('role','users','orgs','organization'));
     }
  
     public function update(OrganizationRequest $request , Organization $organization)

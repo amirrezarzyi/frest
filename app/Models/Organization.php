@@ -40,6 +40,11 @@ class Organization extends Model
         return $this->belongsTo(Organization::class, 'parent_id');
     }
 
+    // public function childrens()
+    // {
+    //     return $this->hasMany(Organization::class,'parent_id');
+    // }
+
     public function getFatherAttribute()
     {
         $organization = $this;

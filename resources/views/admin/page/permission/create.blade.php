@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title','مدیریت - ایجاد نقش')
+@section('title','مدیریت - ایجاد مجوز')
 
 @section('vendor-css')  
     <!-- select2-->
@@ -8,16 +8,16 @@
 @endsection
 
 @section('content')
-<h4 class="breadcrumb-wrapper mb-2"><small class="text-muted fw-light"><a href="">نقش ها</a>/</small> ایجاد نقش</h4>
+<h4 class="breadcrumb-wrapper mb-2"><small class="text-muted fw-light"><a href="">مجوز ها</a>/</small> ایجاد مجوز</h4>
 
  <!-- Multi Column with Form Separator -->
  <div class="card mb-1"> 
-  <form class="card-body" action="{{ route('admin.role.store') }}" method="POST">
+  <form class="card-body" action="{{ route('admin.permission.store') }}" method="POST">
     @csrf
-    <h6 class="fw-normal">* جزئیات نقش</h6>
+    <h6 class="fw-normal">* جزئیات مجوز</h6>
     <div class="row g-3">
       <div class="col-md-6">
-        <label class="form-label" for="title">نام نقش</label>
+        <label class="form-label" for="title">نام مجوز</label>
         <input type="text" id="title" name="title" value="{{ old('title') }}"
         class="form-control text-start"  placeholder="...نام نقش را وارد کنید">
         @error('title')
@@ -39,7 +39,7 @@
         <label class="form-label" for="group">انتخاب گروه </label>
         <select id="group" class="group" name="parent_id" data-allow-clear="true">
           <option value="">انتخاب</option>
-          @foreach ($roleGroups as $group)
+          @foreach ($permissionGroup as $group)
             <option value="{{$group->id}}" {{old('parent_id') == $group->id ? 'selected' : ''}} >{{ $group->name}}</option> 
           @endforeach
         </select>
@@ -64,34 +64,7 @@
         @enderror
       </div> 
     </div>
-    <hr class="my-4 mx-n4">
-    <h6 class="fw-normal">* مجوزها</h6>
-    <div class="row">
-    @foreach ($permissions as $permission) 
-      <div class="col-lg-6">
-        @php ($icons = ["primary","success","danger","warning", "info"]) 
-        @if ($permission->parent_id == null) 
-        <small class="text-light fw-semibold badge bg-label-{{$icons[$loop->index]}}">{{$permission->title}} </small>
-        @endif
-
-        @if (!is_null($permission->childrens))         
-          <div class="demo-inline-spacing mt-3">
-            <div class="list-group"> 
-              @foreach ($permission->childrens as $child) 
-                <label class="list-group-item">
-                  <input class="form-check-input me-1" type="checkbox" value="{{$child->id}}" name="permission[]"
-                  {{ (is_array(old('permission')) and in_array($child->id, old('permission'))) ? ' checked' : '' }}
-                  >
-                    {{$child->title}}
-                </label>  
-              @endforeach
-            </div>
-          </div>
-        @endif
-
-      </div>
-    @endforeach
-    </div>
+    
     <div class="pt-4">
       <button type="submit" class="btn btn-primary me-sm-3 me-1">ثبت</button>
       <button type="reset" class="btn btn-label-secondary">انصراف</button>
